@@ -1,0 +1,114 @@
+doctor_names={'physician':"dr.pavan",'cardiologist':"dr.rakshita",'neurologist':"dr.zohara",'gynecologist':"dr.spoorthi",'dermatologist':"dr.yana",'oncologist':"dr.ram",'dentist':"dr.arijith",'orthopedic':"dr.anandhi"}       
+consultation_fees={'dr.pavan':"1000",'dr.rakshita':"1200",'dr.zohara':"1400",'dr.spoorthi':"1600",'dr.yana':"1500",'dr.ram':"1100",'dr.arijith':"1300",'dr.anandhi':"1700"}
+consultation_time={'dr.pavan':"9 am to 11 am",'dr.rakshita':"10 am to 12 pm",'dr.zohara':"11 am to 1 pm",'dr.spoorthi':"2 pm to 4 pm",'dr.yana':"3 pm to 5 pm",'dr.ram':"10 am to 12 pm",'dr.arijith':"1 pm to 3 pm",'dr.anandhi':"2 pm to 4 pm"} 
+bill_amount={'fever':"300", 'cold':"200", 'flew':"500", 'surgery':"15000", 'cancer':"35000", 'skin-infections':"800", 'hair':"1000",'brain-disorders':"5000", 'nerves-disorder':"10000", 'heart-disorders':"5000", 'asthama':"3000", 'chest pain':"5000",'root-canal':"1500", 'capping':"1200", 'cavities':"800", 'tooth-ache':"500",'fractures':"1300", 'joint-pain':"7000", 'pregnency-checkup':"2000", 'delivery':"10000" }
+
+class hospital_management:    
+    def patient_registration(self):
+        self.data=[]
+        name=input("enter your name:")
+        age=int(input("enter age:"))
+        gender=input("gender:")
+        mobile_no=int(input("mobile number:"))
+        disease_type=input("enter disease type:")
+        date=input("enter consultancy date:")
+        print("registration successfull")
+        self.data.append(name)
+        self.data.append(mobile_no)
+        
+    def patient_login(self):
+        login_name=input("enter name")
+        login_mobile_no=int(input("enter login_mobile_no"))
+        if login_name in self.data and login_mobile_no in self.data:
+            print("login successfull")
+        else:
+            print("invalid")
+    
+    def book_appointment(self):
+        doctors_available=doctor_names.keys()
+        for names in doctors_available:
+            print(names,end=' ')
+        print()
+        doctors_available_input=input("enter doctor: ")
+        print("doctor is ",doctor_names[doctors_available_input])
+        print()
+        
+            
+    def consultation(self):
+        consultency_fees=consultation_fees.keys()
+        for fee in consultency_fees:
+            print(fee,end=' ')
+        print()
+        consultency_fees_input=input("enter doctor: ")
+        self.current_fees = consultation_fees[consultency_fees_input]
+        print("fee is",consultation_fees[consultency_fees_input])
+        print()
+        
+        
+    def visiting_hours(self):
+        visiting_time=consultation_time.keys()
+        for time in visiting_time:
+            print(time,end=' ')
+        print()
+        visiting_time_input=input("enter doctor: ")
+        print("time is ",consultation_time[visiting_time_input])
+        print()
+        
+    def pharmacy_billing(self):
+        billing_details=bill_amount.keys()
+        for amt in billing_details:
+            print(amt,end=' ')
+        print()
+        billing_details_input=input("disease name: ")
+        self.current_phar = bill_amount[billing_details_input]
+        print("bill is",bill_amount[billing_details_input])
+        print()
+        
+        
+    def total_bill(self):
+        self.total=(int(self.current_fees)+int(self.current_phar))
+        print("bill is ",self.total)
+
+        
+    def cancel_appointment(self):
+        cancellation=int(input("enter mobile num: "))
+        if cancellation in self.data:
+            print("Appointment cancelled")
+        else:
+            print("invalid")
+            
+obj=hospital_management()
+while True:
+    print("WELCOME TO LIFE CARE HOSPITAL")
+    print("1.patient registration")
+    print("2.patient login")
+    print("3.book my appointment")
+    print("4.visiting hours")
+    print("5.consultation fees")
+    print("6.treatment cost")
+    print("7.final bill")
+    print("8.cancel appointment")
+    choice=int(input("enter your choice"))
+    
+    if choice==1:
+        obj.patient_registration()
+    elif(choice==2):
+        obj.patient_login()
+    elif choice==3:
+        obj.book_appointment()
+    elif choice==4:
+        obj.visiting_hours()
+    elif choice==5:
+        obj.consultation()
+    elif choice==6:
+        obj.pharmacy_billing()
+    elif choice==7:
+        obj.total_bill()
+        break
+    elif choice==8:
+        obj.cancel_appointment()
+        break
+    
+    else:
+        print("enter valid option")
+        break
